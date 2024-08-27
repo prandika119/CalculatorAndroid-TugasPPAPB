@@ -16,79 +16,78 @@ class MainActivity : AppCompatActivity() {
         lateinit var firstNum: Number;
         lateinit var operator: String;
         lateinit var secondNum: Number;
+        fun getDisplay () :String {
+            return binding.operationDisplay.text.toString()
+        }
+
         binding.number1.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "1"
+            binding.operationDisplay.text = getDisplay() + "1"
         }
         binding.number2.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "2"
+            binding.operationDisplay.text = getDisplay() + "2"
         }
         binding.number3.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "3"
+
+            binding.operationDisplay.text = getDisplay() + "3"
         }
         binding.number4.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "4"
+
+            binding.operationDisplay.text = getDisplay() + "4"
         }
         binding.number5.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "5"
+
+            binding.operationDisplay.text = getDisplay() + "5"
         }
         binding.number6.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "6"
+
+            binding.operationDisplay.text = getDisplay() + "6"
         }
         binding.number7.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "7"
+
+            binding.operationDisplay.text = getDisplay() + "7"
         }
         binding.number8.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "8"
+
+            binding.operationDisplay.text = getDisplay() + "8"
         }
         binding.number9.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "9"
+
+            binding.operationDisplay.text = getDisplay() + "9"
         }
         binding.number0.setOnClickListener {
-            var display = binding.operationDisplay.text.toString()
-            binding.operationDisplay.text = display + "0"
+
+            binding.operationDisplay.text = getDisplay() + "0"
+        }
+
+        fun findFirstNumber (operatorParameter: String){
+            firstNum = getDisplay().toInt()
+            operator = operatorParameter
+            binding.operationDisplay.text = getDisplay()+operatorParameter
         }
         binding.additonButton.setOnClickListener{
-            var display = binding.operationDisplay.text.toString()
-            firstNum = display.toInt()
-            binding.operationDisplay.text = display + "+"
-            operator = "+"
+            findFirstNumber("+")
         }
         binding.minusButton.setOnClickListener{
-            var display = binding.operationDisplay.text.toString()
-            firstNum = display.toInt()
-            binding.operationDisplay.text = display + "-"
-            operator = "-"
+            findFirstNumber("-")
         }
         binding.multipleButton.setOnClickListener{
-            var display = binding.operationDisplay.text.toString()
-            firstNum = display.toInt()
-            binding.operationDisplay.text = display + "*"
-            operator = "*"
+            findFirstNumber("*")
         }
         binding.divideButton.setOnClickListener{
-            var display = binding.operationDisplay.text.toString()
-            firstNum = display.toInt()
-            binding.operationDisplay.text = display + "÷"
-            operator = "/"
+            findFirstNumber("/")
         }
         binding.clearButton.setOnClickListener{
             binding.operationDisplay.text = ""
+            binding.resultDisplay.text = ""
+        }
+        binding.deleteButton.setOnClickListener{
+
+            binding.operationDisplay.text = getDisplay().substring(0, getDisplay().length-1)
         }
 
-
-
         binding.equalButton.setOnClickListener{
-            var display = binding.operationDisplay.text.toString()
-            val splitNum = display.split(operator)
+
+            val splitNum = getDisplay().split(operator)
             secondNum = splitNum[1].toInt()
             if (operator.equals("+")){
                 val result: Number = firstNum.toInt() + secondNum.toInt()
