@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var firstNum: Number;
         lateinit var operator: String;
         lateinit var secondNum: Number;
+        val operatorArray: Array<String> = arrayOf("+", "-", "*", "/")
         fun getDisplay () :String {
             return binding.operationDisplay.text.toString()
         }
@@ -64,16 +65,28 @@ class MainActivity : AppCompatActivity() {
             operator = operatorParameter
             binding.operationDisplay.text = getDisplay()+operatorParameter
         }
+        fun checkDoubleOperator(){
+            if (getDisplay().length>1){
+                if (getDisplay()[(getDisplay().length-1)].toString() in operatorArray){
+                    binding.operationDisplay.text = getDisplay().dropLast(1)
+                }
+            }
+        }
+
         binding.additonButton.setOnClickListener{
+            checkDoubleOperator()
             findFirstNumber("+")
         }
         binding.minusButton.setOnClickListener{
+            checkDoubleOperator()
             findFirstNumber("-")
         }
         binding.multipleButton.setOnClickListener{
+            checkDoubleOperator()
             findFirstNumber("*")
         }
         binding.divideButton.setOnClickListener{
+            checkDoubleOperator()
             findFirstNumber("/")
         }
         binding.clearButton.setOnClickListener{
@@ -81,29 +94,32 @@ class MainActivity : AppCompatActivity() {
             binding.resultDisplay.text = ""
         }
         binding.deleteButton.setOnClickListener{
-
             binding.operationDisplay.text = getDisplay().substring(0, getDisplay().length-1)
         }
 
         binding.equalButton.setOnClickListener{
-
             val splitNum = getDisplay().split(operator)
             secondNum = splitNum[1].toInt()
             if (operator.equals("+")){
                 val result: Number = firstNum.toInt() + secondNum.toInt()
                 binding.resultDisplay.text = result.toString()
+                binding.operationDisplay.text = result.toString()
             }else if (operator.equals("-")){
                 val result: Number = firstNum.toInt() - secondNum.toInt()
                 binding.resultDisplay.text = result.toString()
+                binding.operationDisplay.text = result.toString()
             }else if (operator.equals("*")){
                 val result: Number = firstNum.toInt() * secondNum.toInt()
                 binding.resultDisplay.text = result.toString()
+                binding.operationDisplay.text = result.toString()
             }else if (operator.equals("/")){
                 val result: Number = firstNum.toFloat() / secondNum.toFloat()
                 binding.resultDisplay.text = result.toString()
+                binding.operationDisplay.text = result.toString()
             }else {
                 binding.resultDisplay.text = "error"
             }
+
         }
     }
 }
